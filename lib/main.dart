@@ -15,7 +15,27 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: appTitle,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: Colors.pink,
+        ).copyWith(
+          secondary: Colors.amber,
+        ),
+        canvasColor: const Color.fromRGBO(255, 254, 229, 1),
+        fontFamily: 'Raleway',
+        textTheme: ThemeData.light().textTheme.copyWith(
+              bodyLarge: const TextStyle(color: Color.fromRGBO(20, 51, 51, 1)),
+              bodyMedium: const TextStyle(color: Color.fromRGBO(20, 51, 51, 1)),
+              bodySmall: const TextStyle(color: Color.fromRGBO(20, 51, 51, 1)),
+              titleLarge: const TextStyle(
+                fontFamily: 'RobotoCondensed',
+                fontSize: 24,
+              ),
+              titleMedium: const TextStyle(
+                fontFamily: 'RobotoCondensed',
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
       ),
       home: const CategoriesScreen(appTitle: appTitle),
     );
