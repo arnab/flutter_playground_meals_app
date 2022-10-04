@@ -39,9 +39,9 @@ class MyApp extends StatelessWidget {
               ),
             ),
       ),
-      home: const ListCategoriesScreen(appTitle: appTitle),
       routes: {
-        '/list-meals': (ctx) => const ListMealsScreen(),
+        '/': (ctx) => const ListCategoriesScreen(appTitle: appTitle),
+        ListMealsScreen.routeName: (ctx) => const ListMealsScreen(),
       },
     );
   }
