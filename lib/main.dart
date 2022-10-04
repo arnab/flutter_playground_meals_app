@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_playground_meals_app/widgets/screens/categories_screen.dart';
+import 'package:flutter_playground_meals_app/widgets/screens/list_categories_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
       ),
-      home: const CategoriesScreen(appTitle: appTitle),
+      home: const ListCategoriesScreen(appTitle: appTitle),
     );
   }
 }

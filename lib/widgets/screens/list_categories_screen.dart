@@ -3,10 +3,10 @@ import 'package:flutter_playground_meals_app/widgets/category_item.dart';
 
 import '../../models/category.dart';
 
-class CategoriesScreen extends StatelessWidget {
+class ListCategoriesScreen extends StatelessWidget {
   final String appTitle;
 
-  const CategoriesScreen({super.key, required this.appTitle});
+  const ListCategoriesScreen({super.key, required this.appTitle});
 
   @override
   Widget build(BuildContext context) {
