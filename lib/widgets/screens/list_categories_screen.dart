@@ -24,6 +24,7 @@ class ListCategoriesScreen extends StatelessWidget {
         ),
         children: allCategories
             .map((c) => CategoryItem(
+                  id: c.id,
                   title: c.title,
                   color: c.color,
                 ))

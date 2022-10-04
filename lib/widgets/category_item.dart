@@ -3,10 +3,12 @@ import 'package:flutter_playground_meals_app/widgets/screens/list_meals_screen.d
 
 class CategoryItem extends StatelessWidget {
   final String title;
+  final String id;
   final Color color;
 
   const CategoryItem({
     Key? key,
+    required this.id,
     required this.title,
     required this.color,
   }) : super(key: key);
@@ -14,7 +16,10 @@ class CategoryItem extends StatelessWidget {
   void selectCategory(BuildContext context) {
     Navigator.of(context).push(MaterialPageRoute(
       builder: (_) {
-        return const ListMealsScreen();
+        return ListMealsScreen(
+          categoryId: id,
+          categoryTitle: title,
+        );
       },
     ));
   }
