@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_playground_meals_app/widgets/category_item.dart';
 
-import '../../models/category.dart';
+import '../../models/dummy_data.dart';
 
 class ListCategoriesScreen extends StatelessWidget {
   final String appTitle;
