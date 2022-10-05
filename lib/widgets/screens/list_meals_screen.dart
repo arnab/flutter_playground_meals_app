@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_playground_meals_app/widgets/list_meal_item.dart';
 
 import '../../models/dummy_data.dart';
 import '../../models/meal.dart';
@@ -27,7 +28,7 @@ class ListMealsScreen extends StatelessWidget {
       ),
       body: ListView.builder(
         itemBuilder: (ctx, i) {
-          return Center(child: Text (mealsForCategory[i].title),);
+          return ListMealItem(mealsForCategory[i]);
         },
         itemCount: mealsForCategory.length,
       ),
