@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_playground_meals_app/widgets/screens/show_meal_screen.dart';
 
@@ -44,6 +45,18 @@ class MyApp extends StatelessWidget {
         '/': (ctx) => const ListCategoriesScreen(appTitle: appTitle),
         ListMealsScreen.routeName: (ctx) => const ListMealsScreen(),
         ShowMealScreen.routeName: (ctx) => const ShowMealScreen(),
+      },
+      onUnknownRoute: (settings) {
+        // TODO: Emit metric and errors here
+        if (kDebugMode) {
+          print('Error routing to: ${settings.name} with args: ${settings.arguments}');
+        }
+
+        return MaterialPageRoute(
+          builder: (context) {
+            return const ListCategoriesScreen(appTitle: appTitle);
+          },
+        );
       },
     );
   }
