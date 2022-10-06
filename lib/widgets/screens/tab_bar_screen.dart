@@ -30,13 +30,16 @@ class _TabBarScreenState extends State<TabBarScreen> {
         unselectedItemColor: Colors.white,
         selectedItemColor: Theme.of(context).colorScheme.secondary,
         currentIndex: _selectedTabIndex,
-        items: const [
+        type: BottomNavigationBarType.shifting,
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.category),
+            icon: const Icon(Icons.category),
+            backgroundColor: Theme.of(context).colorScheme.primary,
             label: 'Categories',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.star),
+            icon: const Icon(Icons.star),
+            backgroundColor: Theme.of(context).colorScheme.primary,
             label: 'Favorites',
           ),
         ],
