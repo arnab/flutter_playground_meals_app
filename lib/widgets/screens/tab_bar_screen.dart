@@ -3,6 +3,8 @@ import 'package:flutter_playground_meals_app/main.dart';
 import 'package:flutter_playground_meals_app/widgets/screens/favorite_meals_screen.dart';
 import 'package:flutter_playground_meals_app/widgets/screens/list_categories_screen.dart';
 
+import '../main_drawer.dart';
+
 class TabBarScreen extends StatefulWidget {
   const TabBarScreen({Key? key}) : super(key: key);
 
@@ -11,19 +13,22 @@ class TabBarScreen extends StatefulWidget {
 }
 
 class _TabBarScreenState extends State<TabBarScreen> {
-
   int _selectedTabIndex = 0;
   final List<Map<String, Object>> _screens = const [
-  {'screen': ListCategoriesScreen(), 'title': 'Categories'},
-  {'screen': FavoriteMealsScreen(), 'title': 'Favorites'},
+    {'screen': ListCategoriesScreen(), 'title': 'Categories'},
+    {'screen': FavoriteMealsScreen(), 'title': 'Favorites'},
   ];
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      appBar: AppBar(title: Text(_screens[_selectedTabIndex]['title'] as String)),
+      appBar: AppBar(
+        title: Text(_screens[_selectedTabIndex]['title'] as String),
+      ),
       body: _screens[_selectedTabIndex]['screen'] as Widget,
+      drawer: const Drawer(
+        child: MainDrawer(),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectTab,
         backgroundColor: Theme.of(context).colorScheme.primary,
