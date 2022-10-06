@@ -13,17 +13,17 @@ class TabBarScreen extends StatefulWidget {
 class _TabBarScreenState extends State<TabBarScreen> {
 
   int _selectedTabIndex = 0;
-  final List<Widget> _screens = const [
-    ListCategoriesScreen(),
-    FavoriteMealsScreen()
+  final List<Map<String, Object>> _screens = const [
+  {'screen': ListCategoriesScreen(), 'title': 'Categories'},
+  {'screen': FavoriteMealsScreen(), 'title': 'Favorites'},
   ];
 
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(title: const Text(MyApp.appTitle)),
-      body: _screens[_selectedTabIndex],
+      appBar: AppBar(title: Text(_screens[_selectedTabIndex]['title'] as String)),
+      body: _screens[_selectedTabIndex]['screen'] as Widget,
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectTab,
         backgroundColor: Theme.of(context).colorScheme.primary,
