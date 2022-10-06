@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_playground_meals_app/widgets/screens/show_meal_screen.dart';
+import 'package:flutter_playground_meals_app/widgets/screens/tab_bar_screen.dart';
 
 import 'widgets/screens/list_categories_screen.dart';
 import 'widgets/screens/list_meals_screen.dart';
@@ -12,9 +13,10 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  static const appTitle = 'Mealzsy';
+
   @override
   Widget build(BuildContext context) {
-    const appTitle = 'Mealzsy';
 
     return MaterialApp(
       title: appTitle,
@@ -42,7 +44,7 @@ class MyApp extends StatelessWidget {
             ),
       ),
       routes: {
-        '/': (ctx) => const ListCategoriesScreen(appTitle: appTitle),
+        '/': (ctx) => const TabBarScreen(),
         ListMealsScreen.routeName: (ctx) => const ListMealsScreen(),
         ShowMealScreen.routeName: (ctx) => const ShowMealScreen(),
       },
@@ -54,7 +56,7 @@ class MyApp extends StatelessWidget {
 
         return MaterialPageRoute(
           builder: (context) {
-            return const ListCategoriesScreen(appTitle: appTitle);
+            return const ListCategoriesScreen();
           },
         );
       },
