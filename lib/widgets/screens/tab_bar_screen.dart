@@ -11,27 +11,42 @@ class TabBarScreen extends StatefulWidget {
 }
 
 class _TabBarScreenState extends State<TabBarScreen> {
+
+  int _selectedTabIndex = 0;
+  final List<Widget> _screens = const [
+    ListCategoriesScreen(),
+    FavoriteMealsScreen()
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text(MyApp.appTitle),
-          bottom: const TabBar(
-            tabs: [
-              Tab(icon: Icon(Icons.category), text: 'Categories'),
-              Tab(icon: Icon(Icons.star), text: 'Favorites'),
-            ],
+
+    return Scaffold(
+      appBar: AppBar(title: const Text(MyApp.appTitle)),
+      body: _screens[_selectedTabIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: _selectTab,
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        unselectedItemColor: Colors.white,
+        selectedItemColor: Theme.of(context).colorScheme.secondary,
+        currentIndex: _selectedTabIndex,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.category),
+            label: 'Categories',
           ),
-        ),
-        body: const TabBarView(
-          children: [
-            ListCategoriesScreen(),
-            FavoriteMealsScreen()
-          ],
-        ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.star),
+            label: 'Favorites',
+          ),
+        ],
       ),
     );
+  }
+
+  void _selectTab(int tabIndex) {
+    setState(() {
+      _selectedTabIndex = tabIndex;
+    });
   }
 }
