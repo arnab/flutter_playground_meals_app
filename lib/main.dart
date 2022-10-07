@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_playground_meals_app/models/dummy_data.dart';
 import 'package:flutter_playground_meals_app/widgets/screens/filters_screen.dart';
 import 'package:flutter_playground_meals_app/widgets/screens/show_meal_screen.dart';
 import 'package:flutter_playground_meals_app/widgets/screens/tab_bar_screen.dart';
 
+import 'models/meal.dart';
 import 'widgets/screens/list_categories_screen.dart';
 import 'widgets/screens/list_meals_screen.dart';
 
@@ -11,7 +13,7 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   static const appTitle = 'Mealzsy';
@@ -20,14 +22,50 @@ class MyApp extends StatelessWidget {
   static const secondaryColor = Colors.amber;
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  // TODO: Extract this as a named "Settings/Filters" object and not a Map
+  Map<String, bool> _filters = {
+    'glutenFree': false,
+    'vegetarian': false,
+    'vegan': false,
+    'lactoseFree': false,
+  };
+
+  List<Meal> _availableMeals = allMeals;
+
+  void _setFilters(Map<String, bool> newFilters) {
+    setState(() {
+      _filters = newFilters;
+      _availableMeals = _availableMeals.where((meal) {
+        if (_filters['glutenFree']! && !meal.isGlutenFree) {
+          return false;
+        }
+        if (_filters['vegetarian']! && !meal.isVegetarian) {
+          return false;
+        }
+        if (_filters['vegan']! && !meal.isVegan) {
+          return false;
+        }
+        if (_filters['lactoseFree']! && !meal.isLactoseFree) {
+          return false;
+        }
+        return true;
+      }).toList();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: appTitle,
+      title: MyApp.appTitle,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: primaryColor,
+          primarySwatch: MyApp.primaryColor,
         ).copyWith(
-          secondary: secondaryColor,
+          secondary: MyApp.secondaryColor,
         ),
         canvasColor: const Color.fromRGBO(255, 254, 229, 1),
         fontFamily: 'Raleway',
@@ -46,16 +84,18 @@ class MyApp extends StatelessWidget {
               ),
             ),
         switchTheme: SwitchThemeData(
-          thumbColor: MaterialStateProperty.all(secondaryColor),
+          thumbColor: MaterialStateProperty.all(MyApp.secondaryColor),
           trackColor: MaterialStateProperty.resolveWith((states) =>
-              states.contains(MaterialState.selected) ? primaryColorAccent : null),
+              states.contains(MaterialState.selected)
+                  ? MyApp.primaryColorAccent
+                  : null),
         ),
       ),
       routes: {
         '/': (ctx) => const TabBarScreen(),
-        ListMealsScreen.routeName: (ctx) => const ListMealsScreen(),
+        ListMealsScreen.routeName: (ctx) => ListMealsScreen(_availableMeals),
         ShowMealScreen.routeName: (ctx) => const ShowMealScreen(),
-        FiltersScreen.routeName: (ctx) => const FiltersScreen(),
+        FiltersScreen.routeName: (ctx) => FiltersScreen(_setFilters, _filters),
       },
       onUnknownRoute: (settings) {
         // TODO: Emit metric and errors here
