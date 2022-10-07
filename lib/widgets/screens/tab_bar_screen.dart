@@ -26,8 +26,11 @@ class _TabBarScreenState extends State<TabBarScreen> {
         title: Text(_screens[_selectedTabIndex]['title'] as String),
       ),
       body: _screens[_selectedTabIndex]['screen'] as Widget,
-      drawer: const Drawer(
-        child: MainDrawer(),
+      drawer: Container(
+        color: Theme.of(context).colorScheme.primary,
+        child: const SafeArea(
+          child: MainDrawer(),
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectTab,
