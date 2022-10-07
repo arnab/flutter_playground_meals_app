@@ -15,17 +15,19 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   static const appTitle = 'Mealzsy';
+  static const primaryColor = Colors.pink;
+  static const primaryColorAccent = Colors.pinkAccent;
+  static const secondaryColor = Colors.amber;
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       title: appTitle,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.pink,
+          primarySwatch: primaryColor,
         ).copyWith(
-          secondary: Colors.amber,
+          secondary: secondaryColor,
         ),
         canvasColor: const Color.fromRGBO(255, 254, 229, 1),
         fontFamily: 'Raleway',
@@ -43,6 +45,11 @@ class MyApp extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+        switchTheme: SwitchThemeData(
+          thumbColor: MaterialStateProperty.all(secondaryColor),
+          trackColor: MaterialStateProperty.resolveWith((states) =>
+              states.contains(MaterialState.selected) ? primaryColorAccent : null),
+        ),
       ),
       routes: {
         '/': (ctx) => const TabBarScreen(),
@@ -53,7 +60,8 @@ class MyApp extends StatelessWidget {
       onUnknownRoute: (settings) {
         // TODO: Emit metric and errors here
         if (kDebugMode) {
-          print('Error routing to: ${settings.name} with args: ${settings.arguments}');
+          print(
+              'Error routing to: ${settings.name} with args: ${settings.arguments}');
         }
 
         return MaterialPageRoute(
