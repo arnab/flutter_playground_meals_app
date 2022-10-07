@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_playground_meals_app/widgets/screens/filters_screen.dart';
 import 'package:flutter_playground_meals_app/widgets/screens/show_meal_screen.dart';
 import 'package:flutter_playground_meals_app/widgets/screens/tab_bar_screen.dart';
 
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
         '/': (ctx) => const TabBarScreen(),
         ListMealsScreen.routeName: (ctx) => const ListMealsScreen(),
         ShowMealScreen.routeName: (ctx) => const ShowMealScreen(),
+        FiltersScreen.routeName: (ctx) => const FiltersScreen(),
       },
       onUnknownRoute: (settings) {
         // TODO: Emit metric and errors here
