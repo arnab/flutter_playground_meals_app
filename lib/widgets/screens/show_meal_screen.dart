@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_playground_meals_app/models/meal.dart';
 
 class ShowMealScreen extends StatelessWidget {
-  const ShowMealScreen({Key? key}) : super(key: key);
+  final Function(String) _favoriteToggleHandler;
+  final Function(String) _isMealFavorite;
+
+  const ShowMealScreen(
+      this._favoriteToggleHandler, this._isMealFavorite, {Key? key})
+      : super(key: key);
 
   static const routeName = '/meals/show';
 
@@ -49,7 +54,7 @@ class ShowMealScreen extends StatelessWidget {
                 return Column(
                   children: [
                     ListTile(
-                      leading: CircleAvatar(child: Text('# ${i+1}')),
+                      leading: CircleAvatar(child: Text('# ${i + 1}')),
                       title: Text(meal.steps[i]),
                     ),
                     const Divider(),
@@ -60,6 +65,10 @@ class ShowMealScreen extends StatelessWidget {
             )),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _favoriteToggleHandler(meal.id),
+        child: Icon(_isMealFavorite(meal.id) ? Icons.star : Icons.star_border),
       ),
     );
   }
